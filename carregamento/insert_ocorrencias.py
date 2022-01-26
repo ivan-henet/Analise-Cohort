@@ -3,7 +3,7 @@ import csv
 from banco_de_dados.connections_db import ConnectionPostg
 
 
-class DadosCohort(ConnectionPostg):
+class DadosOcorrencias(ConnectionPostg):
     """Conecta com o Banco de dados PostegreSql"""
 
     def __init__(self):
@@ -11,7 +11,7 @@ class DadosCohort(ConnectionPostg):
 
     def limpa_tabela(self):
         try:
-            sql = """ TRUNCATE TABLE cohort; """
+            sql = """ TRUNCATE TABLE ocorrencias; """
             self.execute(sql)
         except ConnectionError as e:
             return e
@@ -19,7 +19,7 @@ class DadosCohort(ConnectionPostg):
     def inserir_dados_no_bd(self, *args):
         """insere dados dos planos suspensos respectivo ao codsercli no postgresql"""
         try:
-            sql = """INSERT INTO cohort(mes_lan,qtd_lans,mes_can,qtd_can)
+            sql = """INSERT INTO ocorrencias(codsercli,mes_cadastro,mes_can,qtd_can)
              VALUES (%s,%s,%s,%s) """
             self.execute(sql, args)
             self.commit()
@@ -34,8 +34,8 @@ class DadosCohort(ConnectionPostg):
             for row in plan_csv:
 
                 self.inserir_dados_no_bd(
-                    row['mes_lan'],
-                    row['qtd_lans'],
+                    row['codsercli'],
+                    row['mes_cadastro'],
                     row['mes_can'],
                     row['qtd_can'],
                     )

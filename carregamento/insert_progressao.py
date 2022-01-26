@@ -11,7 +11,7 @@ class DadosProgressao(ConnectionPostg):
 
     def limpa_tabela(self):
         try:
-            sql = """ TRUNCATE TABLE progressao_cancelamento; """
+            sql = """ TRUNCATE TABLE progressao; """
             self.execute(sql)
         except ConnectionError as e:
             return e
@@ -19,8 +19,8 @@ class DadosProgressao(ConnectionPostg):
     def inserir_dados_no_bd(self, *args):
         """insere dados dos planos suspensos respectivo ao codsercli no postgresql"""
         try:
-            sql = """INSERT INTO progressao_cancelamento(codcli,codsercli,data_lan,data_can,nro_plano)
-             VALUES (%s,%s,%s,%s,%s) """
+            sql = """INSERT INTO progressao(codcli,codsercli,data_lan,data_hab,data_can,codcan)
+             VALUES (%s,%s,%s,%s,%s,%s) """
             self.execute(sql, args)
             self.commit()
         except ConnectionError as e:
@@ -37,8 +37,9 @@ class DadosProgressao(ConnectionPostg):
                     row['codcli'],
                     row['codsercli'],
                     row['data_lan'],
+                    row['data_hab'],
                     row['data_can'],
-                    row['nro_plano'],
+                    row['codcan'],
                 )
 
             print('Success')

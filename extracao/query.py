@@ -41,7 +41,7 @@ def faz_progressao_de_planos(codcli, data_can):
             and s.codgser != '01SERVER'
             AND sc.codsercli not in ('EO0C113R94','08VH0JTE5L', '09VLMKYYMP', 'KS6V0YDBDI','KS6V0Z0T2N','N16V0OPWGJ',
              '027L0OEGZ4','T57L0N88XI', 'CPVE1ILSSY','IL2C10FNM6','IL2C111IMD','ILVGCQ1FSF', 'R4VKNLHCB6','R4610OL8JY',
-             'T57X12BYBG', 'TCVMUO42H5','UN5G117AOX','UNVJWI3XWQ')
+             'T57X12BYBG', 'TCVMUO42H5','UN5G117AOX','UNVJWI3XWQ','09WBSSGHU3','R48S13M59M')
             """
 
     cur.execute(sql)

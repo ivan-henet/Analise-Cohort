@@ -37,10 +37,6 @@ def cria_tabela_cohort():
             total_vendido[f'{planos[0]}'] = planos[1]
 
     for dados in result_consulta:
-        # if str(dados[0]) == '2021-01-01':
-        #     total_vendido['2021-01-01'] -= int(dados[3])
-        #     mes = round(total_vendido['2021-01-01'] / int(dados[1]) * 100, 2)
-        #     Jan.append(mes)
 
         calculos('2021-01', Jan)
         calculos('2021-02', Fev)
@@ -94,6 +90,7 @@ def cria_tabela_cohort():
                    round(sum(full[8]) / 5, 2), round(sum(full[9]) / 4, 2),
                    round(sum(full[10]) / 3, 2), round(sum(full[11]) / 2, 2),
                    round(sum(full[12]) / 1, 2)]
+    #full_medias = [sum(full[pos]) for pos in range(len(full))]
 
     churn = []
     for pos in range(len(full_medias) - 1):
@@ -105,4 +102,4 @@ def cria_tabela_cohort():
     df_medias = pd.DataFrame(full_medias, columns=['medias'])
     df_churn = pd.DataFrame(churn, columns=['churn'])
     df = pd.concat([df_grafico, df_medias, df_churn], axis=1)
-    arquivo_csv = df.to_csv('./tabela_cohort.csv', encoding='utf-8', sep=',')
+    arquivo_csv = df.to_csv('tabela_cohort.csv', encoding='utf-8', sep=',')

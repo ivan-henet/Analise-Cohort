@@ -19,8 +19,9 @@ class DadosCohort(ConnectionPostg):
     def inserir_dados_no_bd(self, *args):
         """insere dados dos planos suspensos respectivo ao codsercli no postgresql"""
         try:
-            sql = """INSERT INTO cohort(jan,fev,mar,abr,mai,jun,jul,ago,sete,outu,nov,dez,medias,churn)
-             VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) """
+            sql = """INSERT INTO cohort(janeiro,feveveiro,marco,abril,maio,junho,julho,agosto,setembro,outubro,
+                    novembro,dezembro,medias,churn)
+                    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) """
             self.execute(sql, args)
             self.commit()
         except ConnectionError as e:

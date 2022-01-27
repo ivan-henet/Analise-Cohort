@@ -10,7 +10,7 @@ dt_inicio = '2021-01-01'
 dt_fim = '2021-12-01'
 
 
-cria_tabela_progressao(dt_inicio, dt_fim)
+#cria_tabela_progressao(dt_inicio, dt_fim)
 progressao = DadosProgressao()
 progressao.limpa_tabela()
 progressao.ler_csv('./tratamento/tabela_progressao.csv')

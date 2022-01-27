@@ -10,7 +10,8 @@ def consulta_vendidos_e_cancelados(dt_inicio, dt_fim):
         sc.data_lan,
         sc.data_hab,
         IFNULL(sc.data_can,'0001-01-01') as data_can,
-        sc.codcan
+        sc.codcan, 
+        sc.nro_plano
         FROM servicos_cli sc
         LEFT JOIN servicos s ON s.codser = sc.codser
         LEFT JOIN servicos_cli sc_p ON sc_p.codsercli=sc.codsercli_p AND sc.codsercli_p <>''

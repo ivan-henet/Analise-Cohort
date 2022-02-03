@@ -27,18 +27,18 @@ class EngineMysql:
             }
         }
 
-# SQLEngine = "mysql+pymysql://henet:0Y3Prx1f59@177.38.245.178:3306/henet"
 
-#
 # class EnginePostgres:
 #     """Engine de desenvolvimento"""
-#     def __init__(self):
-#         self.config = {
-#             'postgres': {
-#                 'host': 'localhost',
-#                 'database': 'HenetPlanos',
-#                 'user': 'postgres',
-#                 'password': 'henet',
-#                 'port': 5432
-#             }
-#         }
+#
+#     # def __init__(self):
+#     #     self.config = {
+#     #         'postgres': {
+#     #             'host': 'localhost',
+#     #             #'host': 'postgres',
+#     #             'database': 'desenvolvimento',
+#     #             'user': 'postgres',
+#     #             'password': 'henet',
+#     #             'port': 5432
+#     #         }
+#     #     }

@@ -1,6 +1,6 @@
 import pandas as pd
 
-from extracao.query import consulta_ocorrencias_progressao
+from appV1.extracao.query import consulta_ocorrencias_progressao
 
 
 def cria_tabela_cohort():
@@ -22,7 +22,6 @@ def cria_tabela_cohort():
 
     total_vendido = {}
 
-
     def calculos(data, tabela):
         """ Subtrai os cancelamentos jan/dez do total vendido no mes base."""
 
@@ -31,13 +30,11 @@ def cria_tabela_cohort():
             mes = round(total_vendido[f'{data}'] / int(dados[1]) * 100, 2)
             tabela.append(mes)
 
-
     for planos in result_consulta:
         if planos[0] not in total_vendido:
             total_vendido[f'{planos[0]}'] = planos[1]
 
     for dados in result_consulta:
-
         calculos('2021-01', Jan)
         calculos('2021-02', Fev)
         calculos('2021-03', Mar)
@@ -54,13 +51,11 @@ def cria_tabela_cohort():
     i = 0
     top = []
 
-
     def addIndex(arr, pos):
         try:
             return arr[pos]
         except:
             return 0
-
 
     Fev = [addIndex(Fev, i) for i in range(len(Jan))]
     Mar = [addIndex(Mar, i) for i in range(len(Jan))]
@@ -83,23 +78,27 @@ def cria_tabela_cohort():
                             jul=x[6], ago=x[7], set=x[8], out=x[9], nov=x[10], dez=x[11],
                             ))
 
-    full_medias = [round(sum(full[0]) / 12, 2), round(sum(full[1]) / 12, 2),
-                   round(sum(full[2]) / 11, 2), round(sum(full[3]) / 10, 2),
-                   round(sum(full[4]) / 9, 2), round(sum(full[5]) / 8, 2),
-                   round(sum(full[6]) / 7, 2), round(sum(full[7]) / 6, 2),
-                   round(sum(full[8]) / 5, 2), round(sum(full[9]) / 4, 2),
-                   round(sum(full[10]) / 3, 2), round(sum(full[11]) / 2, 2),
-                   round(sum(full[12]) / 1, 2)]
-    #full_medias = [sum(full[pos]) for pos in range(len(full))]
+    meses = []
+    for mes in full:
+        me = []
+        for pos in mes:
+            if pos > 0:
+                me.append(pos)
+        meses.append(me)
+
+    idx_media = [len(x) for x in meses]
+    medias = [sum(full[pos]) for pos in range(len(full))]
+
+    full_medias = [(pos[0] / pos[1]) for pos in zip(medias, idx_media)]
 
     churn = []
     for pos in range(len(full_medias) - 1):
         churn.append(round(full_medias[pos + 1] - full_medias[pos], 2))
     churn.append(0)
 
-
     df_grafico = pd.DataFrame(grafico)
     df_medias = pd.DataFrame(full_medias, columns=['medias'])
     df_churn = pd.DataFrame(churn, columns=['churn'])
     df = pd.concat([df_grafico, df_medias, df_churn], axis=1)
     arquivo_csv = df.to_csv('tabela_cohort.csv', encoding='utf-8', sep=',')
+

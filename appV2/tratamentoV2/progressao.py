@@ -1,7 +1,6 @@
 import pandas as pd
 
-from extracao.query import consulta_vendidos_e_cancelados, validacao_real_de_cancelamento, \
-    faz_progressao_de_planos
+from extracao.querys import consulta_vendidos_e_cancelados, faz_progressao_de_planos
 
 
 def cria_tabela_progressao(inicio, fim):
@@ -98,9 +97,9 @@ def cria_tabela_progressao(inicio, fim):
     df = pd.DataFrame(result_cancelados, columns=colunas)
     df_erros = pd.DataFrame(erros, columns=['erros'])
     erros_csv = df_erros.to_csv('erros.csv', index=False)
-    arquivo_csv = df.to_csv('tabela_progressao.csv', sep=',', encoding='utf-8', index=False)
+    arquivo_csv = df.to_csv('./tabela_progressao.csv', sep=',', encoding='utf-8', index=False)
 
 
-#cria_tabela_progressao('2021-01-01', '2021-12-31')
+
 
 

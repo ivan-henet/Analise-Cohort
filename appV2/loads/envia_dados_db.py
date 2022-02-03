@@ -21,8 +21,8 @@ class DadosCohort(ConnectionPostg):
         try:
             # sql = """INSERT INTO cohort(jan,fev,mar,abr,mai,jun,jul,ago,sete,outu,nov,dez,medias,churn)
             #  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) """
-            sql = """INSERT INTO cohort(janeiro,feveveiro,marco,abril,maio,junho,julho,agosto,setembro,outubro,novembro,dezembro,medias,churn)
-             VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) """
+            sql = """INSERT INTO cohort(index,janeiro,feveveiro,marco,abril,maio,junho,julho,agosto,setembro,outubro,novembro,dezembro,medias,churn)
+             VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) """
             self.execute(sql, args)
             self.commit()
         except ConnectionError as e:
@@ -35,6 +35,7 @@ class DadosCohort(ConnectionPostg):
             plan_csv = csv.DictReader(open(filename, encoding='utf-8'))
             for row in plan_csv:
                 self.inserir_dados_no_bd(
+                    row['index'],
                     row['jan'],
                     row['fev'],
                     row['mar'],
@@ -55,3 +56,7 @@ class DadosCohort(ConnectionPostg):
         except ConnectionError as e:
             print(f'Erro ao inserir os dados: Func: insert_csv: Error: {e}')
             return e
+
+
+if __name__ == '__main__':
+    ...

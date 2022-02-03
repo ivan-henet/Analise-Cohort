@@ -102,3 +102,5 @@ def cria_tabela_cohort():
     df = pd.concat([df_grafico, df_medias, df_churn], axis=1)
     arquivo_csv = df.to_csv('tabela_cohort.csv', encoding='utf-8', sep=',')
 
+if __name__ == '__main__':
+    ...

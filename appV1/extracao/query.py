@@ -119,3 +119,7 @@ def validacao_real_de_cancelamento(codsercli):
 
     cur.execute(sql)
     return cur.fetchall()
+
+
+if __name__ == '__main__':
+    ...

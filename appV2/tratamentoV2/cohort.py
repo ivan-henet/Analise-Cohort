@@ -17,12 +17,14 @@ def cria_tabela_cohort():
     Nov = []
     Dez = []
     vendas_ano = {}
-
+    index_can = []
     # ----------------------------------Cria dict com somatorio de vendas anual por mês
     consulta_total_vendas = csv.DictReader(open('./progressao_agrupada.csv', encoding='utf-8'))
     for planos in consulta_total_vendas:
         if planos['data_lan'] not in vendas_ano:
             vendas_ano[f"{planos['data_lan']}"] = int(planos['total_venda'])
+        if planos['data_can'] not in index_can:
+            index_can.append(planos['data_can'])
 
 
     def calculos(data, tabela):
@@ -107,9 +109,13 @@ def cria_tabela_cohort():
     churn.append(0)
 
     # ----------------------------------Prepara os dados para gerar o arquivo final de  output
+    df_index_can = pd.DataFrame(index_can, columns=['index'])
     df_grafico = pd.DataFrame(grafico)
     df_medias = pd.DataFrame(full_medias, columns=['medias'])
     df_churn = pd.DataFrame(churn, columns=['churn'])
-    df = pd.concat([df_grafico, df_medias, df_churn], axis=1)
+    df = pd.concat([df_index_can,df_grafico, df_medias, df_churn], axis=1)
 
     arquivo_csv = df.to_csv('./tabela_cohort.csv', encoding='utf-8', sep=',', index=False)
+
+if __name__ == '__main__':
+    ...

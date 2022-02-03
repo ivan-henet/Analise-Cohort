@@ -99,7 +99,9 @@ def cria_tabela_progressao(inicio, fim):
     erros_csv = df_erros.to_csv('erros.csv', index=False)
     arquivo_csv = df.to_csv('./tabela_progressao.csv', sep=',', encoding='utf-8', index=False)
 
+if __name__ == '__main__':
+    ...
+    #cria_tabela_progressao('2021-01-01', '2021-12-31')
 
-#cria_tabela_progressao('2021-01-01', '2021-12-31')
 
 

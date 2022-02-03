@@ -54,3 +54,7 @@ class DadosCohort(ConnectionPostg):
         except ConnectionError as e:
             print(f'Erro ao inserir os dados: Func: insert_csv: Error: {e}')
             return e
+
+
+if __name__ == '__main__':
+    ...

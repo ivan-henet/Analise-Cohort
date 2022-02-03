@@ -46,3 +46,5 @@ def faz_progressao_de_planos(codcli, data_can):
     cur.execute(sql)
     return cur.fetchall()
 
+if __name__ == '__main__':
+    ...
